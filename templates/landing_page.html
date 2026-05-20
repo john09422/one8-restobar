@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One8 Restobar | Welcome</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <style>
+    /* RESET & VARIABLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ffc107;
+      --secondary: #4da6ff;
+      --dark-bg: rgba(0,0,0,0.85);
+      --text-primary: white;
+      --text-secondary: rgba(255,255,255,0.7);
+      --border-light: rgba(255,255,255,0.1);
+      --font-main: 'Montserrat', sans-serif;
+      --font-accent: 'Permanent Marker', cursive;
+    }
+
+    /* BODY */
+    body {
+      font-family: var(--font-main);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background:
+      linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+      url("https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/488922944_587177307705719_3192241748937043130_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE_yuSIm83pEylELhu4FQZDq7LjrFq3NEqrsuOsWrc0ShJ4qMsXfjtl0so71P9KunrGbpItMuN6CEkSn-hTpl2l&_nc_ohc=sWPxH7tEreQQ7kNvwHE26yA&_nc_oc=Adou9MqRvBIA79LDRbBxzYlC8OWVxVJ1OLu4YFEXwjvJIaqHqCnVPo1p5ms-34kdeko&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=S39D0VY8r33qpI0GnCH7lQ&_nc_ss=7b2a8&oh=00_Af5KacfdzzLFPBnE2XkebfNGs8y8tK_rLCoXEsk0UQp_3A&oe=6A11B19F");
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--dark-bg);
+      backdrop-filter: blur(12px);
+      padding: 12px 40px;
+      height: 90px;
+    }
+
+    /* NAV LINKS */
+    .nav-link {
+      color: var(--text-primary) !important;
+      font-weight: 600;
+      margin-right: 20px;
+      position: relative;
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary) !important;
+    }
+
+    /* UNDERLINE ANIMATION */
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--secondary);
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Compatibility class */
+    .nav-hover {
+      color: var(--text-primary) !important;
+      font-weight: 600;
+      margin-right: 20px;
+      position: relative;
+      transition: 0.3s ease;
+    }
+
+    .nav-hover:hover { color: var(--secondary) !important; }
+    .nav-hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--secondary);
+      transition: 0.3s ease;
+    }
+    .nav-hover:hover::after { width: 100%; }
+
+    .active-link {
+      color: var(--text-primary) !important;
+    }
+
+    .active-link::after {
+      width: 100%;
+      background: var(--primary);
+    }
+
+    /* BUTTON */
+    .glass-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 18px;
+      border-radius: 8px;
+      color: var(--text-primary);
+      transition: 0.3s ease;
+    }
+
+    .glass-btn:hover {
+      background: var(--secondary);
+      border-color: var(--secondary);
+    }
+
+/* HERO SECTION */
+.hero {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: justify;
+  padding: 60px 80px;
+  gap: 50px;
+}
+/* LEFT CONTENT */
+.hero-content {
+  flex: 1;
+  justify-content: justify;
+  text-align: justify;
+}
+
+/* RIGHT PHOTO CONTAINER */
+.photo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* PHOTO BOX */
+.photo-box {
+  width: 420px;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* IMAGE */
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s ease;
+}
+
+.photo-box img:hover {
+  transform: scale(1.05);
+}
+
+    /* TITLE */
+    .hero h1 {
+      font-family: var(--font-accent);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+    }
+
+    /* DESCRIPTION */
+    .hero-description {
+  font-size: 1.2rem;
+  max-width: 700px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 25px;
+  color: var(--text-secondary);
+
+  text-align: justify;
+}
+
+    /* CTA TEXT */
+    .hero-cta {
+      font-family: var(--font-accent);
+      font-size: 2rem;
+      color: var(--secondary);
+    }
+    
+    /* OPENING HOURS */
+    .opening-hours {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--dark-bg);
+      backdrop-filter: blur(10px);
+      padding: 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-light);
+      margin-top: auto;
+    }
+
+    /* SOCIAL ICONS */
+    .social-icons img {
+      width: 20px;
+      margin: 0 5px;
+      opacity: 0.8;
+      transition: 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    /* From Uiverse.io by TCdesign-dev */ 
+.button {
+ display: inline-block;
+ border-radius: 7px;
+ border: none;
+ background: rgb(142, 145, 142);
+ color: black;
+ font-family: inherit;
+ text-align: center;
+ font-size: 15px;
+ font-family: var(--font-accent);
+ width: 10em;
+ padding: 1em;
+ transition: all 0.1s;
+ cursor: pointer;
+  margin-left: auto;
+ display: block;
+
+}
+
+.button span {
+ cursor: pointer;
+ display: inline-block;
+ position: relative;
+ transition: 0.4s;
+}
+
+.button span:after {
+ position: absolute;
+ opacity: 0;
+ top: 0;
+ right: -20px;
+ transition: 0.7s;
+}
+
+.button:hover span:after {
+ opacity: 4;
+ right: 0;
+}
+.button:hover {
+  background: #9fa0a1;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(77, 166, 255, 0.4);
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}   
+
+.button-container {
+  max-width: 700px; /* same width as description */
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container a {
+  text-decoration: none;
+}
+
+.highlight-section {
+  padding: 60px 40px;
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  margin-top: 40px;
+}
+
+.section-title {
+  font-family: var(--font-accent);
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--primary);
+}
+
+.highlight-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.highlight-item {
+  width: 250px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.highlight-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: 0.3s ease;
+}
+
+.highlight-item:hover img {
+  transform: scale(1.05);
+}
+
+.highlight-item p {
+  margin-top: 10px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+  </style>
+</head>
+
+<body>
+
+  
+<nav class="navbar navbar-dark sticky-top px-4">
+  <a class="navbar-brand" href="{{ url_for('home') }}" style="font-weight: 700; font-size: 1.5rem;">ONE8 RESTOBAR</a>
+   <div class="ms-auto d-flex align-items-center">
+    <a class="nav-link nav-hover active-link" href="{{ url_for('home') }}">Home</a>
+    <a class="nav-link nav-hover" href="{{ url_for('menu') }}">Menu</a>
+    <a class="nav-link nav-hover" href="{{ url_for('reservation') }}">Reservation</a>
+
+  </div>
+</nav>
+
+<div class="hero" id="home">
+
+  <!-- LEFT SIDE -->
+  <div class="hero-content">
+
+    <h1>Welcome to One8 </h1>
+    <h1>Restobar!!!</h1>
+
+    <div class="hero-description">
+      <p>
+        Treat your taste buds to tasty eats and drinks at the newly renovated One8 Restobar.
+        It is a perfect place to stop for an authentic Filipino cuisine and a perfect space
+        for fun-filled and relaxed events.
+      </p>
+
+      <p>
+        Enjoy the inviting menu, creative drinks, and inventive cocktail list high above
+        the hustle and bustle in the heart of City Time Square Mandaue.
+      </p>
+    </div>
+
+    <div class="button-container">
+  <a href="{{ url_for('reservation') }}">
+    <button class="button">
+      <span>Reserve</span>
+    </button>
+  </a>
+
+</div>
+  <br>
+    <div class="hero-cta">
+      COME IN AND SAY HELLO!
+      <div class="opening-hours">
+        Opening Hours: 10AM TO 2AM
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE PHOTO -->
+  <div class="photo-container">
+
+    <div class="photo-box">
+
+      <!-- INSERT YOUR PHOTO HERE -->
+      <img src="https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/487051603_577869795303137_5710076872219508623_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHUv6vHzZyMh0oZSphSJK0PHxb3biePm5ofFvduJ4-bmqrvS63-onqPbUbusJU-bEuK28ALUOpBTe32GoI-yZDN&_nc_ohc=6PtHXZQW40EQ7kNvwET9Xh6&_nc_oc=Adq-EMMB5KqvK_2YMqG0c986UpT1_FI37asV8KqmdISkOdVPTjnVt3ZwcCBUmfM7iSg&_nc_zt=23&_nc_ht=scontent.fceb2-1.fna&_nc_gid=4v_ih8OChpzfuqVfgi9k1g&_nc_ss=7b2a8&oh=00_Af50GcW6peVZR41DfVKL4jNDxjvXH6S--WUoaFLcdCG97g&oe=6A11D2A7" alt="Restobar Photo">
+
+    </div>
+  </div>
+</div>
+<section class="highlight-section">
+
+  <h2 class="section-title">Featured Guests & Visitors</h2>
+
+  <div class="highlight-grid">
+
+    <div class="highlight-item">
+      <img src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/469271558_10160117020612126_9041955710172645436_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHFOg-4DhKGL4qcb5p5PXHbvaVfd24a8WG9pV93bhrxYZKtaWBuNwJIU88kOA3IM3HSnbxmyLFhCMTc2nN0QE8E&_nc_ohc=WKwQy_TGh40Q7kNvwGi2daJ&_nc_oc=AdqsYpA4377gdR1Nw1CKU-xxFZ1o0J1fYGXvtB9xcq6SB3vCxw4_uJYC3W7CBPxNfAU&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=5PTS4mFUhJSbarxjo9jZ6g&_nc_ss=7b2a8&oh=00_Af4JrHgVuITFusCHBOKY2fnVrITFiOB-C6UEDyYVWvrJ2g&oe=6A11B22B" alt="Guest 1">
+      <p>Mardin Keith Fuentes Beltrano</p>
+    </div>
+
+    <div class="highlight-item">
+      <img src="https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/481247685_559387650484685_5867017854493219308_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGPR3Fpxc63LbnfrzlED2fLC04-0WCCH9sLTj7RYIIf20gNlRBecp-wm5vtgdMqbI0UakXrpCIy99SNaV50Htra&_nc_ohc=ut7poDj-0fYQ7kNvwF692EH&_nc_oc=Adq8oSuW13VTqs4r06symSunNV7T0uVNMXJrjNjjcg1xHwdy6U0f_AOie5rW_dyBD8g&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=8PNSjLEd9cMu-0hFdmR4xg&_nc_ss=7b2a8&oh=00_Af48SsVKi5ki-TOaSH_IdsofXy0ciCw6s2KENt03yvOnjw&oe=6A11E3C6" alt="Guest 2">
+      <p>Manny Pacquiao</p>
+    </div>
+
+    <div class="highlight-item">
+      <img src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/482020949_692175496471903_5768861569094535897_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGm5V5sldpZFJPQUZ9KIpH3nUz06O6S94qdTPTo7pL3il2T9MHoIuORV6BzPxSTvvIwo-rsM97RyqJLSsr751MH&_nc_ohc=u7xq8mZkYXQQ7kNvwEspUTs&_nc_oc=AdprFwX_hRhRjG8bpLdl3vQ7gif6qgSDQpW0XC0sS7kESrni3T2NneLJ9JjIaON0xCg&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=rv_-MeNM0f3Ff7ct6D3Edw&_nc_ss=7b2a8&oh=00_Af6IBG-PTw4SUT2L7edOquyIZ6_Q7F3BSul3Mbtzl5Rdhg&oe=6A11B866" alt="Guest 3">
+      <p>Soul 8</p>
+    </div>
+
+  </div>
+
+</section>
+
+<footer class="footer">
+  <div class="container-fluid px-4">
+    <div class="row align-items-center">
+      <div class="col-md-4 text-start">
+        <p class="m-0 small"><b>Contact:</b> 📞 +63 912 345 6789</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <p class="m-0 small"><b>Location:</b> 📍 City Time Square Mandaue, Philippines</p>
+      </div>
+      <div class="col-md-4 text-end">
+        <div class="d-flex justify-content-end align-items-center gap-2">
+          <p class="m-0 small"><b>Follow Us:</b></p>
+          <a href="https://www.facebook.com/share/1b2kQkm7Kh/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" style="width:16px;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

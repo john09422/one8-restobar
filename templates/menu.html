@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Menu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ffc107;
+      --secondary: #4da6ff;
+      --dark-bg: rgba(0,0,0,0.85);
+      --text-primary: white;
+      --text-secondary: rgba(255,255,255,0.7);
+      --border-light: rgba(255,255,255,0.1);
+      --font-main: 'Montserrat', sans-serif;
+      --font-accent: 'Permanent Marker', cursive;
+    }
+
+    /* BODY */
+    body {
+      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+      url('https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/471650396_511242425299208_916360789266442768_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeH4Szt8aIJq1R98AjM5XdaqDaI8zAp6cwMNojzMCnpzAwTplfiN2z7bAWbBs48zCBbkR_SWcVm-bTpCfMu7a3re&_nc_ohc=xhKlmJ48rDYQ7kNvwGdFqad&_nc_oc=Adr7tPTmXxeOEZ1BQ_zDBWbGpuE6AFqhmHCpJAVmYdtQhPDYEIgJOwMytkssyTcCmO4&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=jTJgw-1u-U3dPD_ouMOvFQ&_nc_ss=7b2a8&oh=00_Af4hfsFVPOwNfQBBgoPq8OJ1giM92jFrM35Ro8HwyGy30Q&oe=6A11B5DF');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--dark-bg);
+      backdrop-filter: blur(12px);
+      padding: 12px 40px;
+      height: 90px;
+    }
+    .menu-title { text-align: center; margin: 40px 0; }
+    .menu-title h1 { font-size: 50px; font-weight: 800; color: var(--primary); }
+    .menu-title p { color: var(--text-secondary); font-size: 1.1rem; }
+
+    .menu-container {
+      background: rgba(255,255,255,0.07);
+      padding: 25px;
+      border-radius: 15px;
+      backdrop-filter: blur(15px);
+      margin-bottom: 40px;
+      border: 1px solid var(--border-light);
+    }
+
+    .section-label {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .brand-white {
+      color: var(--text-primary) !important;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-primary) !important;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      transition: 0.3s ease;
+      margin-right: 20px;
+    }
+
+    .nav-link:hover { color: var(--secondary) !important; }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--secondary);
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover::after { width: 100%; }
+
+    /* Compatibility class */
+    .nav-hover {
+      color: var(--text-primary) !important;
+      font-weight: 600;
+      margin-right: 20px;
+      position: relative;
+      transition: 0.3s ease;
+    }
+
+    .nav-hover:hover { color: var(--secondary) !important; }
+    .nav-hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--secondary);
+      transition: 0.3s ease;
+    }
+    .nav-hover:hover::after { width: 100%; }
+
+    .active-link { color: var(--text-primary) !important; }
+    .active-link::after { width: 100%; background: var(--primary); }
+
+    .category-divider {
+      color: #ffc107;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255,193,7,0.3);
+      margin: 20px 0 10px 0;
+      padding-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 15px;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .menu-item:hover {
+      background: rgba(255,193,7,0.2);
+      border-radius: 8px;
+    }
+
+    .status-box {
+      background: rgba(255,255,255,0.12);
+      padding: 15px 18px;
+      margin-top: 5px;
+      border-radius: 0 0 10px 10px;
+      border-left: 5px solid #ffc107;
+      animation: slideDown 0.4s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .qty-btn {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: 0.2s;
+      line-height: 1;
+    }
+
+    .qty-btn:hover { background: var(--primary); color: #000; }
+
+    .qty-display {
+      font-size: 1.2rem;
+      font-weight: 700;
+      min-width: 28px;
+      text-align: center;
+      color: white;
+    }
+
+    .add-to-cart-btn {
+      margin-left: auto;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover { background: #e0a800; transform: translateY(-2px); }
+
+    
+    #cart-section {
+      background: rgba(255,193,7,0.08);
+      border: 1px solid rgba(255,193,7,0.4);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 40px;
+    }
+
+    .cart-title {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.15);
+    }
+
+    .cart-item:last-child { border-bottom: none; }
+
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    .cart-qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 12px;
+    }
+
+    .cart-qty-btn {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      border: 1.5px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: 0.2s;
+    }
+
+    .cart-qty-btn:hover { background: var(--primary); color: #000; }
+
+    .cart-qty-num {
+      font-weight: 700;
+      min-width: 22px;
+      text-align: center;
+    }
+
+    .cart-item-price {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 80px;
+      text-align: right;
+    }
+
+    .cart-remove-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255,100,100,0.8);
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-left: 10px;
+      padding: 0 4px;
+      transition: 0.2s;
+    }
+
+    .cart-remove-btn:hover { color: #ff4444; }
+
+    .cart-total {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 2px solid rgba(255,193,7,0.5);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+  
+
+    .cart-total span:first-child { color: var(--text-secondary); font-weight: 600; }
+    .cart-total span:last-child { color: var(--primary); font-size: 1.4rem; }
+
+    .cart-empty {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+      padding: 15px 0;
+    }
+
+    .clear-cart-btn {
+      background: transparent;
+      border: 1.5px solid rgba(255,100,100,0.6);
+      color: rgba(255,100,100,0.8);
+      border-radius: 8px;
+      padding: 5px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .clear-cart-btn:hover {
+      background: rgba(255,100,100,0.15);
+      color: #ff4444;
+      border-color: #ff4444;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: auto;
+      background: var(--dark-bg);
+      font-size: 14px;
+      border-top: 1px solid var(--border-light);
+    }
+
+
+    .confirm-btn {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .confirm-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255,193,7,0.4);
+      background: #e0a800;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark sticky-top px-4">
+  <a class="navbar-brand" href="{{ url_for('home') }}" style="font-weight: 700; font-size: 1.5rem;">ONE8 RESTOBAR</a>
+  <div class="ms-auto d-flex align-items-center">
+    <a class="nav-link nav-hover" href="{{ url_for('home') }}">Home</a>
+    <a class="nav-link nav-hover active-link" href="{{ url_for('menu') }}">Menu</a>
+    <a class="nav-link nav-hover" href="{{ url_for('reservation') }}">Reservation</a>
+  </div>
+</nav>
+
+<div class="menu-title">  
+  <h1>BAR FOOD MENU</h1>
+  <p>See the selections</p>
+</div>
+      <div class="container">
+        <div class="container">
+        <div class="section-label">Menu</div>
+        <div class="container">
+            {% for category, items in menu_items|groupby('4') %}
+
+              <div class="mt-5 mb-3">
+                <h3 style="color:#ffc107; font-weight:800; text-transform:uppercase;">
+                  {{ category }} MENU
+                </h3>
+                <hr style="border-color: rgba(255,255,255,0.2);">
+              </div>
+
+              <!-- GRID FOR THIS CATEGORY ONLY -->
+              <div class="row g-3">
+
+                {% for item in items %}
+
+                  <div class="col-12 col-md-6 col-lg-4">
+
+                    <div class="card text-white h-100 shadow-sm"
+                        style="background: rgba(255,255,255,0.06);
+                                border: 1px solid rgba(255,255,255,0.1);
+                                border-radius: 14px;
+                                backdrop-filter: blur(10px);">
+
+                      <div class="card-body d-flex flex-column">
+
+                        <!-- Category Badge -->
+                        <span class="badge bg-warning text-dark mb-2 align-self-start">
+                          {{ category }}
+                        </span>
+
+                        <!-- Name -->
+                        <h5 style="font-weight:800;">
+                          {{ item[1] }}
+                        </h5>
+
+                        <!-- Price -->
+                        <p style="color:#ffc107; font-weight:700; font-size:1.1rem;">
+                          ₱{{ item[2] }}
+                        </p>
+
+                        <!-- Status -->
+                        {% if item[3] %}
+                          <span class="badge bg-success mt-auto">Available</span>
+                        {% else %}
+                          <span class="badge bg-danger mt-auto">Sold Out</span>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+        </div>
+      </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 One8 Restobar All Rights Reserved
+</footer>
+
+</body>
+</html>

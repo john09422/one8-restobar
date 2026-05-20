@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inventory Management | One8 Restobar</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .overlay {
+            min-height: 100vh;
+            background: rgba(0,0,0,0.75);
+        }
+
+        .sidebar {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 24px;
+            min-height: 100vh;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            margin-bottom: 24px;
+            color: white;
+            text-transform: uppercase;
+            display: block;
+            text-align: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 14px;
+            color: #cbd5e1;
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            margin-bottom: 8px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+            border-left-color: #facc15;
+            padding-left: 18px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-subtitle {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        .admin-card,
+        .table-box {
+            background: #1e293b;
+            padding: 24px;
+            border-radius: 18px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+        }
+
+        .admin-card h4,
+        .table-box h4 {
+            margin-bottom: 18px;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .form-control,
+        .form-select {
+            background: #0f172a;
+            border: 1px solid rgba(148,163,184,0.22);
+            color: white;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 0.2rem rgba(250,204,21,0.15);
+        }
+
+        .btn-primary,
+        .btn-success,
+        .btn-danger {
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: #facc15;
+            border-color: #facc15;
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background: #eab308;
+            border-color: #eab308;
+        }
+
+        .btn-outline-light {
+            border-radius: 10px;
+            border-color: rgba(255,255,255,0.18);
+        }
+
+        .badge {
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge.instock { background: #16a34a; color: white; }
+        .badge.low { background: #f59e0b; color: #0f172a; }
+        .badge.out { background: #dc2626; color: white; }
+
+        .table thead th {
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            color: #94a3b8;
+        }
+
+        .table tbody tr:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .form-inline-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            align-items: end;
+        }
+
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.22);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background: rgba(0,0,0,0.85);
+            color: white;
+            font-size: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay container-fluid">
+  <div class="row g-0">
+    <div class="col-lg-2 col-md-3 sidebar d-flex flex-column">
+      <div class="logo">ONE8 RESTOBAR</div>
+      <nav class="d-flex flex-column gap-2">
+        <a href="{{ url_for('menu_manage') }}" class="nav-link">Menu Management</a>
+        <a href="{{ url_for('inventory_manage') }}" class="nav-link active">Inventory Management</a>
+        <a href="{{ url_for('reservation_manage') }}" class="nav-link">Reservation Management</a>
+      </nav>
+      <div class="mt-auto">
+        <button onclick="logout()" class="btn btn-danger w-100">Log Out</button>
+      </div>
+    </div>
+    <div class="col-lg-10 col-md-9 content">
+      <div class="page-header">
+        <div>
+          <h2>Inventory Management</h2>
+        </div>
+      </div>
+            {% for item in inventory_items %}
+
+                    <div class="modal fade" id="editInventoryModal{{ item[0] }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content bg-dark text-white">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Inventory Item</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <form method="POST" action="/inventory/update/{{ item[0] }}">
+
+                            <div class="modal-body">
+
+                            <input type="text" name="name"
+                                    id="name{{ item[0] }}"
+                                    class="form-control mb-2"
+                                    placeholder="Item Name">
+
+                            <input type="number" name="quantity"
+                                    id="qty{{ item[0] }}"
+                                    class="form-control mb-2"
+                                    placeholder="Quantity">
+
+                            <input type="text" name="category"
+                                    id="cat{{ item[0] }}"
+                                    class="form-control mb-2"
+                                    placeholder="Category">
+
+                            <input type="text" name="unit"
+                                    id="unit{{ item[0] }}"
+                                    class="form-control mb-2"
+                                    placeholder="Unit">
+
+                            <input type="number" name="price"
+                                    id="price{{ item[0] }}"
+                                    class="form-control mb-2"
+                                    placeholder="Price">
+
+                            <div class="form-check">
+                                <input type="checkbox"
+                                    name="status"
+                                    id="status{{ item[0] }}"
+                                    value="on"
+                                    {% if item[6] %}checked{% endif %}>
+                            </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                            <button class="btn btn-success">Update</button>
+                            </div>
+
+                        </form>
+
+                        </div>
+                    </div>
+                    </div>
+
+                    {% endfor %}
+
+        <!-- Input Section -->
+        <form action="{{ url_for('add_inventory') }}" method="POST">
+          <div class="admin-card">
+            <h4 class="mb-4">Add Inventory Item</h4>
+            <div class="row g-2">
+              <div class="col-md-3">
+                <input name="item_name" class="form-control" placeholder="Item Name" required>
+              </div>
+              <div class="col-md-2">
+                <input name="quantity" type="number" class="form-control" placeholder="Qty" required>
+              </div>
+              <div class="col-md-2">
+                <input name="category" class="form-control" placeholder="Category" required>
+              </div>
+              <div class="col-md-2">
+                <input name="unit" class="form-control" placeholder="Unit" required>
+              </div>
+              <div class="col-md-2">
+                <input name="price" type="number" class="form-control" placeholder="Price" required>
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">Add Item</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Table Section -->
+        <div class="table-box">
+            <table class="table table-dark table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Unit</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in inventory_items %}
+
+                        <tr class="card-hover">
+
+                        <td>{{ item[1] }}</td>  <!-- name -->
+                        <td>{{ item[2] }}</td>  <!-- quantity -->
+                        <td>{{ item[3] }}</td>  <!-- category -->
+                        <td>{{ item[4] }}</td>  <!-- unit -->
+                        <td>₱{{ item[5] }}</td> <!-- price -->
+
+                        <td>
+                            {% if item[6] %}
+                                    <span class="badge instock">Available</span>
+                                {% else %}
+                                    <span class="badge out">Out of Stock</span>
+                                {% endif %}
+                        </td>
+
+                        <td>
+                            <form action="{{ url_for('delete_inventory', id=item[0]) }}" method="POST" style="display:inline;">
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this item?')">
+                                Delete
+                            </button>
+                            </form>
+
+                            <button class="btn btn-primary btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editInventoryModal{{ item[0] }}"
+                                    onclick="fillEditForm(
+                                    '{{ item[0] }}',
+                                    '{{ item[1] }}',
+                                    '{{ item[2] }}',
+                                    '{{ item[3] }}',
+                                    '{{ item[4] }}',
+                                    '{{ item[5] }}',
+                                    '{{ item[6] }}'
+                                    )">
+                            Edit
+                            </button>
+                        </td>
+
+                        <td>{{ item[7] }}</td> <!-- last updated -->
+
+                        </tr>
+
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    © 2026 One8 Restobar All Rights Reserved
+</footer>
+
+<script>
+    function fillEditForm(id, name, qty, category, unit, price, status) {
+
+    document.getElementById("name" + id).value = name;
+    document.getElementById("qty" + id).value = qty;
+    document.getElementById("cat" + id).value = category;
+    document.getElementById("unit" + id).value = unit;
+    document.getElementById("price" + id).value = price;
+
+    let checkbox = document.getElementById("status" + id);
+    checkbox.checked = false;
+    checkbox.checked =
+        status === true || status === "true" || status === 1;
+}
+    function logout() {
+    window.location.replace("{{ url_for('logout') }}");
+    }
+    render();
+</script>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</html>
