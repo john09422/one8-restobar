@@ -21,7 +21,8 @@ login_manager.session_protection = 'strong'
 #admin123
 
 def get_db_connection():
-    return psycopg2.connect(os.environ.get("DATABASE_URL"))
+    db_url = os.environ.get("DATABASE_URL")
+    return psycopg2.connect(db_url, sslmode='require')
 
 
 # =========================
