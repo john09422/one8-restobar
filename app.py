@@ -20,6 +20,10 @@ login_manager.session_protection = 'strong'
 #admin
 #admin123
 
+def get_db_connection():
+    return psycopg2.connect(os.environ.get("DATABASE_URL"))
+
+
 # =========================
 # ADMIN CREDENTIALS & AUTHENTICATION
 # =========================
@@ -32,13 +36,7 @@ def add_header(response):
     return response
 
 def get_admin_by_username(username):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
     cur = conn.cursor()
 
     cur.execute("""
@@ -160,13 +158,7 @@ def create_admin():
 
 @app.route('/create', methods=['POST'])
 def reservation_create():
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -224,13 +216,7 @@ def reservation_create():
     return redirect(url_for('reservation'))
     
 def reservation_view():
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -266,13 +252,7 @@ def reservation_view():
 @app.route('/delete-reservation/<int:id>', methods=['POST'])
 @login_required
 def delete_reservation(id):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -291,13 +271,7 @@ def delete_reservation(id):
 @app.route('/confirm-reservation/<int:id>', methods=['POST'])
 @login_required
 def confirm_reservation(id):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -317,13 +291,7 @@ def confirm_reservation(id):
 @app.route('/cancel-reservation/<int:id>', methods=['POST'])
 @login_required
 def cancel_reservation(id):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -347,13 +315,7 @@ def cancel_reservation(id):
 @app.route('/menu_manage')
 @login_required
 def menu_manage():
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -380,13 +342,7 @@ def menu_manage():
 @app.route('/menu/add', methods=['POST'])
 @login_required
 def add_menu_item():
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
     cur = conn.cursor()
 
     name = request.form['name']
@@ -415,13 +371,7 @@ def add_menu_item():
 @app.route('/menu/update/<int:id>', methods=['POST'])
 @login_required
 def update_menu(id):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
     cur = conn.cursor()
 
     name = request.form['name']
@@ -447,13 +397,7 @@ def update_menu(id):
 @app.route('/menu/delete/<int:id>', methods=['POST'])
 @login_required
 def delete_menu(id):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
     cur = conn.cursor()
 
     cur.execute("""
@@ -469,13 +413,7 @@ def delete_menu(id):
 
 @app.route('/menu_display')
 def menu_display():
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -504,13 +442,7 @@ def menu_display():
 # =========================
 
 def get_inventory_items():
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
 
     cur = conn.cursor()
 
@@ -547,13 +479,7 @@ def inventory_view():
 @app.route('/inventory/add', methods=['POST'])
 @login_required
 def add_inventory():
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
     cur = conn.cursor()
 
     name = request.form['item_name']
@@ -579,13 +505,7 @@ def add_inventory():
 @app.route('/inventory/update/<int:id>', methods=['POST'])
 @login_required
 def update_inventory(id):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
     cur = conn.cursor()
 
     name = request.form['name']
@@ -618,13 +538,7 @@ def update_inventory(id):
 @app.route('/inventory/delete/<int:id>', methods=['POST'])
 @login_required
 def delete_inventory(id):
-    conn = psycopg2.connect(
-        database="resto_db",
-        user="postgres",
-        password="101406",
-        host="localhost",
-        port="5432"
-    )
+    conn = get_db_connection()
     cur = conn.cursor()
 
     cur.execute("""
