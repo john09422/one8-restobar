@@ -7,6 +7,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import check_password_hash
 from psycopg2 import connect
 from werkzeug.security import generate_password_hash
+import os
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
@@ -641,7 +642,6 @@ def delete_inventory(id):
 
 
 
-import os
 
 if __name__ == '__main__':
     app.run(
